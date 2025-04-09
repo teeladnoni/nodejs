@@ -1,5 +1,6 @@
 import express from 'express'
 import mongoose from "mongoose"
+import serverless from 'serverless-http'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -9,6 +10,7 @@ app.set('view engine', 'ejs');
 
 // Serve static files (if any) from the 'public' folder
 app.use(express.static('public'));
+app.set('views', path.join(__dirname, '../views'));
 
 // Connect to MongoDB using Mongoose
 mongoose.connect('mongodb+srv://Adesinaola1234:5MBQFimZoV8Xe9ER@cluster0.jobmt.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0', {
@@ -48,6 +50,8 @@ app.get('/add', async (req, res) => {
     res.status(500).send('Error adding item');
   }
 });
+
+module.exports = serverless(app); // 🔥 required for Vercel
 
 // Start the server
 app.listen(PORT, () => {
