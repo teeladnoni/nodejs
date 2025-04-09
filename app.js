@@ -1,6 +1,7 @@
 import express from 'express'
 import mongoose from "mongoose"
 import serverless from 'serverless-http'
+import path from 'path'
 
 const app = express();
 const PORT = process.env.PORT || 3000;
